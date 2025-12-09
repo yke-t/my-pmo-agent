@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myPMO Agent - Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -27,6 +29,9 @@
                 <button class="cmd-btn" data-cmd="update-issue">
                     ➕ /update-issue - 課題追加
                 </button>
+                <button class="cmd-btn" data-cmd="add-task">
+                    📋 /add-task - タスク追加
+                </button>
             </div>
         </section>
 
@@ -35,11 +40,8 @@
             <div id="ask-form" class="form-container">
                 <h3>AI分析</h3>
                 <label for="query">質問を入力してください：</label>
-                <textarea 
-                    id="query" 
-                    placeholder="例: 期限が近い課題は？&#10;例: ベンダーAの進捗状況は？&#10;例: 停滞しているタスクを教えて"
-                    rows="4"
-                ></textarea>
+                <textarea id="query" placeholder="例: 期限が近い課題は？&#10;例: ベンダーAの進捗状況は？&#10;例: 停滞しているタスクを教えて"
+                    rows="4"></textarea>
                 <button class="submit-btn" onclick="askQuery()">送信</button>
             </div>
 
@@ -88,6 +90,51 @@
                 </div>
                 <button class="submit-btn" onclick="updateIssue()">課題を追加</button>
             </div>
+
+            <div id="add-task-form" class="form-container hidden">
+                <h3>スケジュールにタスク追加</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="task-name">タスク名 *</label>
+                        <input type="text" id="task-name" placeholder="例: ベンダーA進捗確認" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-start">開始予定 *</label>
+                        <input type="date" id="task-start" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-end">終了予定 *</label>
+                        <input type="date" id="task-end" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-assignee">担当者 *</label>
+                        <input type="text" id="task-assignee" placeholder="例: 田中" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-vendor">ベンダー名</label>
+                        <input type="text" id="task-vendor" placeholder="例: ベンダーA">
+                    </div>
+                    <div class="form-group">
+                        <label for="task-status">ステータス</label>
+                        <select id="task-status">
+                            <option value="未着手" selected>未着手</option>
+                            <option value="進行中">進行中</option>
+                            <option value="停滞">停滞</option>
+                            <option value="完了">完了</option>
+                            <option value="保留">保留</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-progress">進捗率</label>
+                        <input type="text" id="task-progress" placeholder="0%" value="0%">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="task-memo">メモ（任意）</label>
+                        <input type="text" id="task-memo" placeholder="例: 緊急対応必要">
+                    </div>
+                </div>
+                <button class="submit-btn" onclick="addTask()">タスクを追加</button>
+            </div>
         </section>
 
         <!-- Loading Indicator -->
@@ -105,7 +152,8 @@
         <!-- Footer -->
         <footer>
             <p>
-                <a href="https://docs.google.com/spreadsheets/d/1C6ua596iFVCG2fx6YnYviqthrF3K4EYYxUPJhNUUt7A/edit" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1C6ua596iFVCG2fx6YnYviqthrF3K4EYYxUPJhNUUt7A/edit"
+                    target="_blank">
                     📊 Spreadsheet
                 </a>
                 <span class="separator">|</span>
@@ -119,4 +167,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
