@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPMO Agent - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎯 myPMO Agent</h1>
+            <p class="subtitle">AI-Powered PMO Assistant</p>
+        </header>
+
+        <!-- Command Selector -->
+        <section class="command-section">
+            <h2>コマンド選択</h2>
+            <div class="command-buttons">
+                <button class="cmd-btn active" data-cmd="ask">
+                    📊 /ask - AI分析
+                </button>
+                <button class="cmd-btn" data-cmd="risk-alert">
+                    🚨 /risk-alert - リスク検出
+                </button>
+                <button class="cmd-btn" data-cmd="update-issue">
+                    ➕ /update-issue - 課題追加
+                </button>
+            </div>
+        </section>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div id="ask-form" class="form-container">
+                <h3>AI分析</h3>
+                <label for="query">質問を入力してください：</label>
+                <textarea 
+                    id="query" 
+                    placeholder="例: 期限が近い課題は？&#10;例: ベンダーAの進捗状況は？&#10;例: 停滞しているタスクを教えて"
+                    rows="4"
+                ></textarea>
+                <button class="submit-btn" onclick="askQuery()">送信</button>
+            </div>
+
+            <div id="risk-form" class="form-container hidden">
+                <h3>リスク検出</h3>
+                <p>期限超過の課題と停滞タスクを検出します。</p>
+                <button class="submit-btn" onclick="checkRisks()">リスク検出</button>
+            </div>
+
+            <div id="update-form" class="form-container hidden">
+                <h3>課題追加</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="category">カテゴリ</label>
+                        <input type="text" id="category" placeholder="例: 技術課題">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">内容</label>
+                        <input type="text" id="content" placeholder="例: API連携エラー">
+                    </div>
+                    <div class="form-group">
+                        <label for="vendor">ベンダー名</label>
+                        <input type="text" id="vendor" placeholder="例: ベンダーA">
+                    </div>
+                    <div class="form-group">
+                        <label for="assignee">担当者</label>
+                        <input type="text" id="assignee" placeholder="例: 鈴木">
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">優先度</label>
+                        <select id="priority">
+                            <option value="緊急">緊急</option>
+                            <option value="高">高</option>
+                            <option value="中" selected>中</option>
+                            <option value="低">低</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="deadline">期限</label>
+                        <input type="date" id="deadline">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="impact">影響範囲（任意）</label>
+                        <input type="text" id="impact" placeholder="例: 全体">
+                    </div>
+                </div>
+                <button class="submit-btn" onclick="updateIssue()">課題を追加</button>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>処理中...</p>
+        </div>
+
+        <!-- Response Section -->
+        <section id="response-section" class="response-section hidden">
+            <h2>結果</h2>
+            <div id="response-content" class="response-content"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                <a href="https://docs.google.com/spreadsheets/d/1C6ua596iFVCG2fx6YnYviqthrF3K4EYYxUPJhNUUt7A/edit" target="_blank">
+                    📊 Spreadsheet
+                </a>
+                <span class="separator">|</span>
+                <a href="https://console.cloud.google.com/?project=my-pmo-agent-v1" target="_blank">
+                    ☁️ GCP Console
+                </a>
+            </p>
+            <p class="powered-by">Powered by Gemini 2.5 Flash</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

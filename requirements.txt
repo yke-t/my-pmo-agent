@@ -1,0 +1,10 @@
+# Google Cloud APIs
+google-auth==2.36.0
+google-api-python-client==2.154.0
+google-cloud-aiplatform==1.75.0
+
+# Cloud Functions
+functions-framework==3.8.2
+
+# Utilities
+python-dotenv==1.0.0
